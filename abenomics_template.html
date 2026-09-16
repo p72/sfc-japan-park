@@ -1,0 +1,468 @@
+<title>アベノミクスがなかったら</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#f5f7f7; --sheet:#ffffff; --ink:#16242b; --ink-2:#4d6169; --ink-3:#7d9099;
+  --rule:#dbe3e4; --rule-2:#eaeff0;
+  --accent:#0d6b6b; --accent-soft:#e2efee;
+  --minus:#9c4526; --plus:#2f6b46;
+  --code-bg:#eef2f2;
+  --act:#8a8f94; --base:#1a1a19; --mod:#2a78d6; --ref:#c9782e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1519; --sheet:#161f24; --ink:#e4ecee; --ink-2:#a3b4bb; --ink-3:#748890;
+    --rule:#26343a; --rule-2:#1d282d;
+    --accent:#5bc4bd; --accent-soft:#152b2b;
+    --minus:#e08a68; --plus:#7fc79c;
+    --code-bg:#121b1f;
+    --act:#8e9aa1; --base:#dfe8ea; --mod:#63a6f0; --ref:#e0a06a;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1519; --sheet:#161f24; --ink:#e4ecee; --ink-2:#a3b4bb; --ink-3:#748890;
+  --rule:#26343a; --rule-2:#1d282d;
+  --accent:#5bc4bd; --accent-soft:#152b2b;
+  --minus:#e08a68; --plus:#7fc79c;
+  --code-bg:#121b1f;
+  --act:#8e9aa1; --base:#dfe8ea; --mod:#63a6f0; --ref:#e0a06a;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  font-size:16px; line-height:1.85; margin:0; padding-inline:20px; padding-block:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px; margin:0 auto}
+header{padding-block:60px 38px; border-bottom:2px solid var(--ink)}
+.eyebrow{
+  font-family:"JetBrains Mono",monospace; font-size:.72rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent); margin:0 0 18px
+}
+h1{
+  font-family:"Shippori Mincho",serif; font-weight:700; font-size:clamp(2rem,6vw,2.9rem);
+  line-height:1.35; margin:0; text-wrap:balance; letter-spacing:.01em;
+}
+.lede{color:var(--ink-2); font-size:1.05rem; margin:20px 0 0; max-width:62ch}
+.about{
+  font-size:.88rem; line-height:1.8; color:var(--ink-2); max-width:62ch;
+  margin:22px 0 0; padding:2px 0 2px 15px; border-left:3px solid var(--accent);
+}
+.about strong{color:var(--ink)}
+.about .go{display:inline-block; margin-top:4px; font-weight:700}
+a{color:var(--accent); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--accent) 45%, transparent)}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+section{padding-block:42px; border-bottom:1px solid var(--rule-2)}
+section:last-of-type{border-bottom:none}
+h2{
+  font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.5rem;
+  margin:0 0 6px; text-wrap:balance; display:flex; gap:14px; align-items:baseline;
+}
+h2 .n{font-family:"JetBrains Mono",monospace; font-size:.8rem; color:var(--accent); font-weight:600; flex:none}
+h3{font-size:1.02rem; font-weight:700; margin:30px 0 8px}
+p{margin:14px 0; max-width:65ch}
+ul,ol{margin:14px 0; padding-left:1.3em; max-width:65ch}
+li{margin:7px 0}
+em{font-style:normal; color:var(--accent); font-weight:500}
+code{
+  font-family:"JetBrains Mono",monospace; font-size:.86em;
+  background:var(--code-bg); padding:.12em .4em; border-radius:4px;
+}
+pre{
+  background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+  padding:16px 18px; overflow-x:auto; margin:18px 0; line-height:1.7;
+}
+pre code{background:none; padding:0; font-size:.82rem}
+.cmt{color:var(--ink-3)}
+.kw{color:var(--accent); font-weight:600}
+.scroll{overflow-x:auto; margin:18px 0}
+table{border-collapse:collapse; width:100%; font-size:.9rem; min-width:460px}
+th,td{border-bottom:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top}
+th{font-weight:700; color:var(--ink-2); font-size:.82rem; white-space:nowrap}
+td.num,th.num{text-align:right; font-family:"JetBrains Mono",monospace;
+  font-variant-numeric:tabular-nums; white-space:nowrap}
+tr.total td{border-top:2px solid var(--rule); border-bottom:none; font-weight:700}
+.neg{color:var(--minus)} .pos{color:var(--plus)}
+.note{
+  background:var(--accent-soft); border-left:3px solid var(--accent);
+  padding:14px 18px; margin:22px 0; border-radius:0 6px 6px 0;
+}
+.note p{margin:8px 0; max-width:none}
+.note p:first-child{margin-top:0} .note p:last-child{margin-bottom:0}
+figure{margin:24px 0}
+.chart{background:var(--sheet); border:1px solid var(--rule); border-radius:8px; padding:12px 6px 4px}
+svg{display:block; width:100%; height:auto}
+figcaption{font-size:.82rem; color:var(--ink-3); margin-top:10px}
+.grid{stroke:var(--rule); stroke-width:1}
+.tick{fill:var(--ink-3); font-size:11px; font-family:"JetBrains Mono",monospace}
+.ln{fill:none; stroke-width:2.2; stroke-linejoin:round; stroke-linecap:round}
+.ln.act{stroke:var(--act); stroke-width:1.6}
+.ln.base{stroke:var(--base)}
+.ln.s10{stroke:var(--mod); stroke-dasharray:7 4}
+.ln.ref{stroke:var(--ref); stroke-dasharray:3 4}
+.lbl{font-size:11.5px; font-weight:700}
+.lbl.act{fill:var(--act)} .lbl.base{fill:var(--base)} .lbl.s10{fill:var(--mod)} .lbl.ref{fill:var(--ref)}
+.cat{fill:var(--ink); font-size:12.5px; font-weight:700}
+.val{fill:var(--ink-2); font-size:11px; font-family:"JetBrains Mono",monospace}
+.bar.paper{fill:var(--ref)} .bar.mine{fill:var(--mod)}
+.bar.up{fill:var(--minus)} .bar.down{fill:var(--plus)}
+.zero{stroke:var(--ink-2); stroke-width:1.4}
+.big{font-family:"Shippori Mincho",serif; font-size:clamp(1.6rem,5vw,2.1rem);
+  font-weight:700; line-height:1.3; margin:18px 0 6px; color:var(--minus)}
+.big .u{font-size:.55em; color:var(--ink-2); font-weight:500; margin-left:.3em}
+.key{display:flex; flex-wrap:wrap; gap:16px; font-size:.8rem; color:var(--ink-2);
+  margin:10px 0 0; padding-left:6px}
+.key span{display:flex; align-items:center; gap:6px}
+.key i{width:16px; height:3px; border-radius:2px; display:block}
+footer{padding-block:36px 60px; color:var(--ink-3); font-size:.84rem; border-top:1px solid var(--rule)}
+@media (max-width:520px){
+  body{font-size:15px}
+  header{padding-block:44px 30px}
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Counterfactual Simulation</p>
+  <h1>アベノミクスがなかったら</h1>
+  <p class="about">この記事の数字は、<strong>朴勝俊先生の日本版ストック＆フロー一貫（SFC）マクロ計量モデル</strong>を Python で一から書き直して出したものです。方程式169本をコードに起こし、データの取得・パラメータの推定・求解・作図までを自動で回せるようにしてあります。データセットも公開統計から独立に組み直したので、論文の表と突き合わせて検算できます。<br>
+  <a class="go" href="https://claude.ai/code/artifact/25320706-465f-4821-9f18-4e72239b4934">再実装の入門ガイドを読む →</a></p>
+  <p class="lede">「もし、あの政策をやっていなかったら」を数字で言うにはどうするか。日本経済のマクロ計量モデルを使った反実仮想シミュレーションを、はじめての人向けに解説します。使うのは2013〜{{end}}年度の{{nyears}}年間です。生産だけでなく、<strong>政府の借金がどうなったか</strong>まで見ます。最後に、消費税を動かしたらどうなるかも並べました。</p>
+</header>
+
+<section>
+  <h2><span class="n">01</span>そもそも何を知りたいのか</h2>
+  <p>アベノミクスの効果を測りたい、とします。いちばん素朴なやり方は「政策の前と後を比べる」ことです。2012年度の実質GDPは518兆円、2023年度は556兆円。だから38兆円ぶん効果があった——と言いたくなります。</p>
+  <p><strong>これは間違いです。</strong>この{{nyears}}年間には、政策以外のことも山ほど起きました。世界経済の伸び、人口減少、消費税の引き上げ、コロナ。前後を比べても、そのぜんぶが混ざってしまいます。</p>
+  <p>本当に知りたいのは、<em>「他の条件をぜんぶ同じにしたまま、政策だけ無かった世界」</em>です。現実にはそんな世界は観測できません。だから<strong>モデルの中に作ります</strong>。これを反実仮想（counterfactual）と言います。</p>
+</section>
+
+<section>
+  <h2><span class="n">02</span>やり方は「2回解いて、差を見る」</h2>
+  <p>手順はたった3つです。</p>
+  <ol>
+    <li><strong>ベースラインを解く。</strong>実際に起きたとおりの条件で、モデルを2010年度から2023年度まで走らせる</li>
+    <li><strong>シナリオを解く。</strong>政策に関わる入力だけを「やらなかった」値に差し替えて、もう一度同じように走らせる</li>
+    <li><strong>2本の差を取る。</strong>これが政策の効果</li>
+  </ol>
+  <div class="note">
+    <p><strong>いちばん大事な注意。</strong>比べるのは<strong>モデルの線どうし</strong>です。「シナリオ」と「実績」を比べてはいけません。</p>
+    <p>モデルには誤差があります。ベースラインも実績とぴったり同じにはなりません。シナリオと実績を比べると、その誤差が政策効果に混ざってしまいます。ベースラインと比べれば誤差は両方に同じだけ乗るので、差を取ったときに消えます。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">03</span>「やらなかった」を7つのスイッチで表す</h2>
+  <p>アベノミクスは「三本の矢」と呼ばれました。金融政策・財政政策・成長戦略です。これを、モデルに入力する外生変数7本の操作に翻訳します。</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>矢</th><th>シナリオ</th><th>やらなかったら、を表す操作</th></tr>
+    <tr><td rowspan="3">第一の矢<br>金融政策</td><td>2. 利下げなし</td><td>2013年度以降、実質国債金利を1.8%ポイント高くする</td></tr>
+    <tr><td>3. 為替が高いまま</td><td>2013年度以降、名目実効為替レートを20%ポイント高くする（円安が起きない）</td></tr>
+    <tr><td>4. 株価が上がらない</td><td>2012年度以降、株式の評価調整（値上がり益）をゼロにする</td></tr>
+    <tr><td rowspan="3">第二の矢<br>財政政策</td><td>5. 2012年度の補正予算なし</td><td>2012年度だけ、実質政府消費と実質政府投資を6.5兆円ずつ減らす</td></tr>
+    <tr><td>6. 政府消費の抑制</td><td>2013年度以降、実質政府消費を毎年5兆円減らす</td></tr>
+    <tr><td>7. 政府投資の抑制</td><td>2013年度以降、実質政府投資を毎年5兆円減らす</td></tr>
+    <tr><td>第三の矢<br>成長戦略</td><td>8. 成長戦略の効果なし</td><td>2013年度以降、実質設備投資が毎年5兆円低い水準にとどまる</td></tr>
+  </table>
+  </div>
+
+  <p>この7つを<strong>同時に</strong>全部かけたのが「アベノミクス全効果」のシナリオです。7つの矢が全部なかった世界、という意味になります。</p>
+  <p>数字の根拠は元の論文にあります。たとえば金利の1.8%ポイントは、民主党政権期の実質国債金利2.58%と安倍政権期の0.76%の差から来ています。為替の20%ポイントも、実際の円安幅から逆算したものです。</p>
+</section>
+
+<section>
+  <h2><span class="n">04</span>コードで書くとこれだけ</h2>
+  <p>「政策をやらなかった世界」を作るのに必要なコードは、驚くほど短いです。外生変数の表を書き換えるだけだからです。</p>
+
+<pre><code><span class="cmt"># 7つのシナリオ。d は外生変数の表（年度 × 変数）</span>
+<span class="kw">def</span> s2(d):  d.loc[2013:, <span class="kw">"RRB"</span>]  += 0.018      <span class="cmt"># 実質国債金利 +1.8%pt</span>
+<span class="kw">def</span> s3(d):  d.loc[2013:, <span class="kw">"NEER"</span>] += 0.2        <span class="cmt"># 実効為替 +20%pt</span>
+<span class="kw">def</span> s4(d):
+    <span class="kw">for</span> c <span class="kw">in</span> [c <span class="kw">for</span> c <span class="kw">in</span> d.columns <span class="kw">if</span> c.startswith(<span class="kw">"NEQUACG_"</span>)]:
+        d.loc[2012:, c] = 0.0                    <span class="cmt"># 株の値上がり益をゼロに</span>
+<span class="kw">def</span> s5(d):
+    d.loc[2012, <span class="kw">"GR"</span>]   -= 6500.0                <span class="cmt"># 単位は十億円</span>
+    d.loc[2012, <span class="kw">"IR_G"</span>] -= 6500.0
+<span class="kw">def</span> s6(d):  d.loc[2013:, <span class="kw">"GR"</span>]   -= 5000.0      <span class="cmt"># 政府消費 −5兆円/年</span>
+<span class="kw">def</span> s7(d):  d.loc[2013:, <span class="kw">"IR_G"</span>] -= 5000.0      <span class="cmt"># 政府投資 −5兆円/年</span>
+
+<span class="cmt"># 全効果 = 2 から 8 を重ねがけする</span>
+<span class="kw">def</span> s10(d):
+    <span class="kw">for</span> f <span class="kw">in</span> (s2, s3, s4, s5, s6, s7, s8):
+        f(d)
+</code></pre>
+
+  <p>そして、走らせて差を取ります。</p>
+
+<pre><code>base = model.simulate(d,     2010, 2023)   <span class="cmt"># ベースライン</span>
+alt  = d.copy(); s10(alt)
+sim  = model.simulate(alt,   2010, 2023)   <span class="cmt"># やらなかった世界</span>
+
+効果 = sim[<span class="kw">"YR"</span>] - base[<span class="kw">"YR"</span>]            <span class="cmt"># 実質GDPの差</span>
+</code></pre>
+
+  <div class="note">
+    <p><strong>方程式は1行も触っていません。</strong>動かすのは入力の表だけです。モデルの中身（169本の連立方程式）はベースラインもシナリオもまったく同じものを使います。ここを変えてしまうと、比べているものが2つの世界ではなく2つのモデルになってしまいます。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">05</span>結果を見る</h2>
+  <p>実質GDPの推移です。黒がベースライン（実際どおりの条件）、青の破線が「アベノミクスがなかった世界」。この2本の差が政策の効果です。灰色の実績は、モデルがどれだけ実績に沿っているかの参考として置いています。</p>
+
+  <figure>
+    <div class="chart">
+      <svg viewBox="0 0 700 330" role="img" aria-label="実質GDPの推移。ベースライン、アベノミクスがなかった場合、実績の3本">
+{{svg:yr}}
+      </svg>
+    </div>
+    <div class="key">
+      <span><i style="background:var(--base)"></i>ベースライン（モデル）</span>
+      <span><i style="background:var(--mod)"></i>アベノミクスなし（モデル）</span>
+      <span><i style="background:var(--act)"></i>実績（統計値）</span>
+    </div>
+    <figcaption>実質GDP、兆円。2010・2011年度は操作を始める前なので2本が完全に重なっています。2012年度に差が開き始めるのは、補正予算のシナリオがこの年から効くためです。</figcaption>
+  </figure>
+
+  <p>{{end}}年度でベースライン{{yr_base0}}兆円に対して「なかったら」{{yr_s10_0}}兆円。<strong>差は{{yr_diff0}}兆円、率にして{{yr_pct}}%</strong>です。毎年の差を2012年度から{{end}}年度まで足し上げると<strong>{{cum10}}兆円</strong>になります。</p>
+</section>
+
+<section>
+  <h2><span class="n">06</span>三本の矢のどれが効いたのか</h2>
+  <p>7つのスイッチは1本ずつ切ることもできます。矢ごとにまとめた、{{nyears}}年間の実質GDP損失の累計です。</p>
+
+  <figure>
+    <div class="chart">
+      <svg viewBox="0 0 700 232" role="img" aria-label="三本の矢ごとの実質GDP損失の累計。論文と本実装の比較">
+{{svg:arrows}}
+      </svg>
+    </div>
+    <div class="key">
+      <span><i style="background:var(--ref)"></i>元の論文</span>
+      <span><i style="background:var(--mod)"></i>この再実装</span>
+    </div>
+    <figcaption>2013〜2023年度の実質GDP損失の累計、兆円。マイナスが大きいほど「その矢が無かったときの打撃が大きい」＝効果が大きかった、という読み方になります。</figcaption>
+  </figure>
+
+  <p><strong>いちばん効いたのは第二の矢、財政政策です。</strong>政府消費・政府投資・補正予算を合わせて{{fiscal0}}兆円。金融政策（{{money0}}兆円）の{{fiscal_ratio}}倍あります。「アベノミクスといえば異次元緩和」という印象とは、だいぶ違う結果です。</p>
+
+  <h3>1本ずつの内訳</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>シナリオ</th><th class="num">元の論文</th><th class="num">この再実装</th></tr>
+{{table:scen}}
+  </table>
+  </div>
+
+  <div class="note">
+    <p><strong>「足し算」と「同時にかける」が一致しないのはなぜ？</strong> モデルが非線形だからです。7つを同時に効かせると互いに打ち消し合う部分があり、単純な合計より少し小さく出ます。論文が142.6に対して138.5、この再実装が{{sum_cum}}に対して{{cum10}}。<strong>ずれ方まで似ている</strong>のが、再現できている証拠のひとつです。</p>
+  </div>
+
+  <p>1本ずつ見ると、小さい2本（利下げ・為替）で符号が食い違っています。どちらも金額が小さく、モデルの中で正負の経路が拮抗するところなので、データの作り方の差で符号が入れ替わりやすい場所です。大きい5本は方向も大きさもよく合っています。</p>
+
+  <h3>利下げで実質GDPが下がる？</h3>
+  <p>この再実装では「利下げなし」が<strong>プラス{{s2_cum0}}兆円</strong>、つまり金利が高いままのほうが実質GDPがわずかに高い、という結果になります。直感に反しますが、理由ははっきりしています。このモデルは<em>ストック＆フロー一貫</em>型で、家計が1,772兆円の金融純資産を持っていることまで勘定に入れます。金利が上がると、投資は減りますが<strong>家計の利子所得が増えます</strong>。日本のように家計が巨額の純債権を持つ経済では、後者が前者を上回ることがある、というのがモデルの答えです。</p>
+  <p>元の論文でもこの経路は効いていて、だから「利下げなし」の損失はマイナス8.5兆円と、他の矢に比べて小さく出ています。符号が割れるほど拮抗している、と読むのが正確でしょう。</p>
+</section>
+
+<section>
+  <h2><span class="n">07</span>政府の借金はどうなったか</h2>
+  <p>ここまでは生産の話でした。では財政はどうでしょう。アベノミクスは補正予算を組み、政府消費も政府投資も増やしました。<strong>やらなければ、そのぶん借金は少なくて済んだはず</strong>——そう考えるのが自然です。</p>
+  <p>モデルの答えは逆でした。</p>
+
+  <p class="big">＋{{debt10_0}}兆円<span class="u">{{end}}年度の純公債残高</span></p>
+  <p>対GDP比では <strong>{{ratio_base}}% → {{ratio_s10}}%</strong>。<em>{{ratio_diff10}}%ポイントも悪化します。</em>アベノミクスをやらなかった世界のほうが、借金は重かったことになります。</p>
+
+  <figure>
+    <div class="chart">
+      <svg viewBox="0 0 700 330" role="img" aria-label="純公債残高の対GDP比。ベースライン、アベノミクスがなかった場合、実績の3本">
+{{svg:ratio}}
+      </svg>
+    </div>
+    <div class="key">
+      <span><i style="background:var(--base)"></i>ベースライン（モデル）</span>
+      <span><i style="background:var(--mod)"></i>アベノミクスなし（モデル）</span>
+      <span><i style="background:var(--act)"></i>実績（統計値）</span>
+    </div>
+    <figcaption>純公債残高の対名目GDP比、％。上に行くほど借金が重い。青の破線は2014年度あたりから急に上を向き、そのまま離れていきます。</figcaption>
+  </figure>
+
+  <h3>どこから来たのか、1本ずつ切って調べる</h3>
+  <p>7つのスイッチを1本ずつ切って、{{end}}年度の純公債残高がベースラインからどれだけ動くかを見ます。プラスが借金の増加です。</p>
+
+  <figure>
+    <div class="chart">
+      <svg viewBox="0 0 700 300" role="img" aria-label="シナリオごとの純公債残高の増減。{{end}}年度、兆円">
+{{svg:debtbars}}
+      </svg>
+    </div>
+    <div class="key">
+      <span><i style="background:var(--minus)"></i>借金が増える</span>
+      <span><i style="background:var(--plus)"></i>借金が減る</span>
+    </div>
+    <figcaption>{{end}}年度の純公債残高、ベースラインとの差、兆円。7本を同時にかけた「全効果」では＋{{debt10}}兆円になります。</figcaption>
+  </figure>
+
+  <p><strong>歳出を絞る3本（5・6・7）は、ちゃんと借金を減らしています。</strong>合わせて{{spend3_0}}兆円。直感どおりです。</p>
+  <p>ところが、それを打ち消して余りある2本があります。<em>利下げなし（＋{{s2_debt0}}兆円）</em>と<em>株価が上がらない（＋{{s4_debt0}}兆円）</em>。この2本だけで{{s24_debt0}}兆円です。</p>
+
+  <h3>なぜそうなるのか──2つの経路</h3>
+  <p>借金の増え方は、2つに分解できます。<strong>毎年の赤字が積み上がったぶん</strong>と、<strong>持っている資産の値段が動いたぶん</strong>です。</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>シナリオ</th><th class="num">借金の増分</th><th class="num">赤字の累積</th><th class="num">資産の評価</th></tr>
+{{table:decomp}}
+  </table>
+  </div>
+  <p style="font-size:.84rem; color:var(--ink-3)">2012〜{{end}}年度の累計、兆円。紙幅の都合で主な4本と合計のみ。</p>
+
+  <p><strong>利下げなしは、まるごと利払いです。</strong>増分{{s2_debt0}}兆円がそっくり「赤字の累積」に入っています。政府は1,100兆円規模の借金を抱えているので、金利が1.8%ポイント高いと、国債の利払いは{{nyears}}年で{{s2_int0}}兆円増えます。政府自身の利子収入が{{s2_fin0}}兆円、税収が{{s2_tax0}}兆円、社会保障の収支が{{s2_str0}}兆円よくなるぶんを差し引いて、{{s2_debt0}}兆円が残ります。</p>
+
+  <div class="note">
+    <p><strong>「日銀からの納付金」について。</strong>国債{{debt_base0}}兆円のうち{{cb_jgb0}}兆円は日銀が持っています。日銀が受け取った利子は、経費を除いて納付金として政府に戻ります。元の論文（WP65版）はこれを「日銀の黒字は全額いっぺんに政府へ移す」という式で入れていて、この記事もそれを使っています。だから政府の利子負担は、<em>日銀以外が持つ国債のぶん</em>だけ、と考えるのが自然です。</p>
+    <p>ところが利下げなしのシナリオでは、この納付金がほとんど増えません（{{nyears}}年で{{s2_cb0}}兆円）。理由は日銀の国債保有の決まり方にあります。このモデルでは日銀の保有は<em>他の部門が持った残り</em>として決まり、実質金利が高いと銀行などが国債を買い増すので、そのぶん日銀の保有が減ります。金利が上がった一方で保有が減り、日銀の利子収入は行って来いになるのです。政府から見ると、高い利子を払う相手が日銀から銀行に入れ替わっただけで、戻ってくる分は増えません。</p>
+  </div>
+
+  <p><strong>株価が上がらないほうは、半分以上が「資産の評価」です。</strong>{{s4_debt0}}兆円のうち{{s4_reval0}}兆円がこちら。理由は、<em>政府自身が株を持っているから</em>です。年金積立金などを通じて、{{end}}年度で{{gov_eq0}}兆円。アベノミクス期の株高で、この保有株に{{nyears}}年間で{{s4_reval0}}兆円の含み益が生まれました。株が上がらなければ、その含み益は存在しません。政府の資産が{{s4_reval0}}兆円少ないぶん、帳尻は国債の発行で合わせることになります。</p>
+
+  <div class="note">
+    <p><strong>ここがストック＆フロー一貫モデルの持ち味です。</strong>ふつうのマクロモデルは「毎年の赤字」までしか見ません。このモデルは<strong>政府が何をいくら持っているか</strong>まで勘定に入れるので、資産価格の変化が財政に効く経路が最初から入っています。{{s10_reval}}兆円という数字は、ベースラインの政府保有株の評価益の累計と、ぴったり一致します。</p>
+  </div>
+
+  <h3>2つの読み方</h3>
+  <p>この結果は「緊縮しても借金は減らない」という意味ではありません。歳出を絞る3本は、実際に借金を減らしています。</p>
+  <p>言えるのはこうです。<strong>財政赤字を削って減らせる借金より、金融緩和と資産価格が押し下げていた借金のほうが大きかった。</strong>そして後者は、財政当局が「節約した」結果ではありません。</p>
+  <p>もうひとつ。分母のGDPも効いています。アベノミクスをやらなかった世界では名目GDPが1割ほど低いので、同じ借金でも対GDP比は重く出ます。<strong>借金の絶対額と対GDP比のどちらを見るかで、政策の評価は変わります。</strong>ここでは両方を並べました。</p>
+</section>
+
+<section>
+  <h2><span class="n">08</span>消費税を動かしたら、借金はどうなるか</h2>
+  <p>ここまでの7本のスイッチに、消費税は入っていません。別立ての実験があるからです。方向は2つ。</p>
+  <ul>
+    <li><strong>予定どおり増税</strong>——2015年10月に10%へ。実際には2019年10月まで延期されたので、<em>4年前倒し</em>の世界です（元の論文のシナリオ9）。</li>
+    <li><strong>5%のまま据え置き</strong>——2014年度の8%も、その後の10%もなかった世界。<em>こちらは論文にはなく、私の拡張です。</em></li>
+  </ul>
+  <p>直感はこうでしょう。増税すれば借金は減る。据え置けば借金は増える。</p>
+  <p>モデルの答えは、両方とも違いました。</p>
+
+  <p class="big">＋{{s9_debt}}兆円<span class="u">予定どおり増税したときの純公債残高</span></p>
+  <p>消費税を4年早く10%へ上げると、{{end}}年度の借金は<strong>{{debt_base}}兆円 → {{debt_s9}}兆円</strong>。わずかですが<em>増えます。</em>逆に5%のまま据え置くと<strong>{{debt_s5}}兆円</strong>で、{{s5_debt_abs}}兆円<em>減ります</em>。</p>
+
+  <figure>
+    <div class="chart">
+      <svg viewBox="0 0 700 310" role="img" aria-label="消費税シナリオ2本の、純公債残高対GDP比のベースラインからの差。2012年度から{{end}}年度">
+{{svg:tax}}
+      </svg>
+    </div>
+    <div class="key">
+      <span><i style="background:var(--mod)"></i>予定どおり増税</span>
+      <span><i style="background:var(--ref)"></i>5%のまま据え置き</span>
+    </div>
+    <figcaption>純公債残高対GDP比の、ベースラインからの差、％ポイント。上が悪化。増税のほうは{{s9_peak_year}}年度に＋{{s9_peak}}まで悪化し、最後の{{s9_neg_years}}年でマイナスに落ちます。</figcaption>
+  </figure>
+
+  <h3>同じ3列に分けてみる</h3>
+  <p>アベノミクスのときと同じ分解です。<strong>毎年の赤字が積み上がったぶん</strong>と、<strong>持っている資産の値段が動いたぶん</strong>。</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>シナリオ</th><th class="num">借金の増分</th><th class="num">赤字の累積</th><th class="num">資産の評価</th></tr>
+{{table:taxdecomp}}
+  </table>
+  </div>
+  <p style="font-size:.84rem; color:var(--ink-3)">2012〜{{end}}年度の累計、兆円。</p>
+
+  <p>アベノミクスの「株価が上がらない」では、増分の{{s4_reval_share}}割が<em>資産の評価</em>でした。消費税のほうは<strong>2本とも、資産の評価がきっかりゼロです。</strong>税率は政府の持っている株や年金資産の値段に直接は触らないので、動く経路が<em>赤字の累積しかない</em>。同じ借金の増減でも、中身がまったく違います。</p>
+
+  <h3>増税したのに、なぜ赤字が増えるのか</h3>
+  <p>赤字の中身を項目ごとに割ると、こうなります。プラスが財政の改善です。</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>項目</th><th class="num">予定どおり増税</th><th class="num">5%据え置き</th></tr>
+{{table:taxflow}}
+  </table>
+  </div>
+  <p style="font-size:.84rem; color:var(--ink-3)">2012〜{{end}}年度の累計、兆円。合計はモデルの政府純貸出の差と一致します（恒等式の検算）。</p>
+
+  <p><strong>消費税は、ちゃんと{{s9_tin}}兆円の増収になっています。</strong>取れる税金は増えました。それでも財政が良くならないのは、それを食う支出増が2つ乗るからです。</p>
+  <p>ひとつめは<em>国債の利子で{{s9_int_abs}}兆円</em>。理由はモデルの1行にあります。</p>
+  <pre><code>rB = RrB + (PC - PC(-1)) / PC(-1)
+<span class="cmt">#  国債の名目金利 ＝ 実質金利 ＋ 消費者物価の上昇率</span></code></pre>
+  <p>消費税を上げれば消費者物価は上がります。実質金利のほうはこのバージョンでは外から与える数字なので動きません。つまり<strong>上がった物価がそのまま名目金利に乗ります。</strong>そして政府は1,100兆円規模の借金を抱えている。わずかな金利上昇でも、かける相手が大きすぎるのです。ただし国債の半分近くは日銀が持っていて、日銀が受け取った利子は納付金として政府に戻ります（＋{{s9_cb}}兆円）。差し引きの利子負担は{{s9_int_net}}兆円です。利下げなしのシナリオでは納付金がほとんど動きませんでしたが、こちらは大きく動きます。あちらは<em>実質金利</em>が上がって銀行が国債を買い増し、日銀の保有が減りました。消費税のほうは物価だけが動いて実質金利は変わらないので、日銀の保有はそのまま、受け取る利子だけが増えるからです。</p>
+  <p>ふたつめは<em>社会保障の収支で{{s9_str_abs}}兆円</em>。増税で家計の所得が細ると、社会保険料の入りが減り、給付が増えます。所得税なども{{s9_tax_abs}}兆円減ります。</p>
+  <p>5%据え置きは、これをそっくり逆回しにしたものです。消費税の減収{{s5_tin_abs}}兆円は大きい。しかし<strong>物価が上がらないので利払いが{{s5_int}}兆円浮き（日銀からの納付も{{s5_cb_abs}}兆円減るので差し引き{{s5_int_net}}兆円）、経済が大きいので社会保障と所得税で{{s5_strtax}}兆円入ってくる。</strong>政府消費・政府投資の名目額が{{s5_gov_abs}}兆円増えるぶんを引いても、足し引き{{s5_nl}}兆円の黒字方向でした。</p>
+
+  <div class="note">
+    <p><strong>ここは結果がモデルの作りに強く左右される場所です。</strong>このモデルは、借金の全体が毎年その年の金利で借り換えられるものとして利払いを計算します（<code>rB(-1) * NGBA_G(-1)</code>）。ところが実際の国債は固定利付きで、いったん発行してしまえば物価が上がっても利払いは増えず、むしろ<strong>返済の実質的な重さは軽くなります。</strong>つまりこのモデルは「物価上昇 → 利払い増」を強めに見て、「物価上昇 → 借金の実質目減り」を見ていません。増税シナリオの結論は、この扱いにかなり寄りかかっています。</p>
+  </div>
+
+  <h3>対GDP比はどちらも下がる</h3>
+  <p>借金の絶対額では増税がプラス、据え置きがマイナスと分かれました。ところが<strong>対GDP比では、2本とも下がります。</strong></p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>{{end}}年度</th><th class="num">純公債残高</th><th class="num">対GDP比</th><th class="num">名目GDP</th><th class="num">実質GDP</th></tr>
+{{table:taxlevels}}
+  </table>
+  </div>
+  <p style="font-size:.84rem; color:var(--ink-3)">兆円。実質GDPは2015年度連鎖価格。</p>
+
+  <p>理由は分母です。増税の世界では名目GDPが{{s9_yn_pct}}%大きい。ただしそれは<em>物価が上がったから</em>で、実質GDPはむしろ{{s9_yr_pct_abs}}%小さい。<strong>比率の改善{{s9_ratio_abs}}%ポイントは、生産が増えたのではなく、値札が上がったぶんです。</strong></p>
+  <p>据え置きのほうは中身が違います。名目GDPは{{s5_yn_pct}}%大きく、実質GDPは{{s5_yr_pct}}%大きい。こちらは<em>本当に経済が大きくなった</em>結果として比率が{{s5_ratio_abs}}%ポイント下がっています。</p>
+  <p>借金の絶対額と対GDP比、名目と実質。<strong>どれを見るかで「増税は財政を良くしたか」の答えが変わります。</strong>ここでは4つ全部を並べました。</p>
+
+  <div class="note">
+    <p><strong>5%据え置きの数字は、いちばん弱いところです。</strong>これは論文にないシナリオで、しかもモデルを拡張方向に強く押します。失業率は{{end}}年度で{{s5_unr_min}}%まで下がりました。賃金の式には「1 ÷ 失業率」という項が入っていて、失業率が小さいほど急に効きます。係数を推定した期間（1994年度以降）の失業率の最小は{{unr_data_min}}%なので、ここは推定に使ったデータの外側です。賃金と物価まわりの数字は割り引いて読んでください。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">09</span>元の論文と突き合わせる</h2>
+  <p>この再実装は、データセットを公開統計から独立に組み直しています。同じ結果が出るかどうかが検証になります。全効果シナリオの、ベースラインからの変化率です。</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>変数</th><th></th><th class="num">2013</th><th class="num">2015</th><th class="num">2018</th><th class="num">2020</th><th class="num">2023</th></tr>
+{{table:t20}}
+  </table>
+  </div>
+  <p style="font-size:.84rem; color:var(--ink-3)">単位は％（ベースライン比）。</p>
+
+  <p><strong>実質GDPは5年とも{{yr_maxgap}}%ポイント以内で合います。</strong>名目GDPと賃金は論文と同じ向きで、論文より深くは出ず、年によって最大{{ynw_gap_hi}}%ポイントほど浅く出ます。累計の損失は{{cum10}}兆円に対して論文が138.5兆円で、{{cum_pct_diff}}%差です。</p>
+  <p>合わないのは実質家計消費です。論文はどの年もマイナスですが、この再実装は後半でプラスに転じます。原因も分かっていて、このシナリオでは物価が下がるため、<strong>実質の可処分所得と実質の純資産が増えて</strong>、消費関数がそれを拾ってしまうためです。消費の式の係数の違いが効いていると見ています。</p>
+</section>
+
+<section>
+  <h2><span class="n">10</span>読むときに気をつけること</h2>
+
+  <h3>これは「予測」ではない</h3>
+  <p>過去に起きたことの、別バージョンを計算しているだけです。未来を当てにいっているのではありません。</p>
+
+  <h3>「政策をやらなかったら」の中身は仮定である</h3>
+  <p>金利が1.8%ポイント高かった、為替が20%ポイント高かった——これらは論文の著者が根拠を示して置いた仮定です。別の仮定を置けば別の数字が出ます。<strong>結果の数字より、仮定の置き方のほうが議論の対象になるべき</strong>です。</p>
+
+  <h3>モデルには誤差がある</h3>
+  <p>ベースライン自体、実績を完全には再現しません。2010〜2023年度の平均絶対誤差率は実質GDPで1.5%、消費デフレータで1.0%、賃金で2.1%です。差を取れば誤差の多くは相殺されますが、ゼロにはなりません。</p>
+
+  <h3>効果の大きさは「モデルの構造」が決めている</h3>
+  <p>財政政策がいちばん効くという結果も、利下げの符号が割れるのも、このモデルがそう組まれているからです。別の型のモデル（たとえば家計の金融資産を明示的に持たないもの）なら、違う答えが出ます。<strong>「日本経済の真実」ではなく「このモデルに聞いたときの答え」</strong>として読むのが正確です。</p>
+
+  <div class="note">
+    <p>それでも反実仮想に意味があるのは、<strong>仮定と計算がぜんぶ明示されている</strong>からです。前後比較のように「何が混ざっているか分からない」ということがありません。どの仮定に納得できないかを指差して議論できる——それが、この方法のいちばんの取り柄です。</p>
+  </div>
+</section>
+
+<footer>
+  出典：朴勝俊「日本版ストック＆フロー・一貫マクロ計量モデルによるアベノミクスの評価」（2026年、ワーキングペーパー）のシナリオ設定と表20・表21。消費税の増税シナリオは同論文のシナリオ9、5%据え置きは論文にない拡張です。<br>
+  「この再実装」は、同論文の方程式体系169本を Python で書き直し、データセットを公開統計（内閣府「国民経済計算」2023年度確報ほか）から独立に組み直して解いたものです。<br>
+  {{date}}
+</footer>
+
+</div>

@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+
+# 統計表の Excel（再取得できる）
+cache/
+
+# 生成物。README が参照する図2枚だけ追跡する
+*.png
+!park_final.png
+!park_final_error.png
+park_partial.csv
+park_final.csv
+park_forecast.csv
+abenomics_park.csv

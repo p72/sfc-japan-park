@@ -1,0 +1,330 @@
+<title>朴モデルのデータセット</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#f5f7f7; --sheet:#ffffff; --ink:#16242b; --ink-2:#4d6169; --ink-3:#7d9099;
+  --rule:#dbe3e4; --rule-2:#eaeff0;
+  --accent:#0d6b6b; --accent-soft:#e2efee;
+  --warn:#9c4526; --warn-soft:#f6e9e3;
+  --code-bg:#eef2f2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1519; --sheet:#161f24; --ink:#e4ecee; --ink-2:#a3b4bb; --ink-3:#748890;
+    --rule:#26343a; --rule-2:#1d282d;
+    --accent:#5bc4bd; --accent-soft:#152b2b;
+    --warn:#e08a68; --warn-soft:#2b1c15;
+    --code-bg:#121b1f;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1519; --sheet:#161f24; --ink:#e4ecee; --ink-2:#a3b4bb; --ink-3:#748890;
+  --rule:#26343a; --rule-2:#1d282d;
+  --accent:#5bc4bd; --accent-soft:#152b2b;
+  --warn:#e08a68; --warn-soft:#2b1c15;
+  --code-bg:#121b1f;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  font-size:16px; line-height:1.85; margin:0; padding-inline:20px; padding-block:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:780px; margin:0 auto}
+header{padding-block:56px 36px; border-bottom:2px solid var(--ink)}
+.eyebrow{
+  font-family:"JetBrains Mono",monospace; font-size:.72rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent); margin:0 0 16px
+}
+h1{
+  font-family:"Shippori Mincho",serif; font-weight:700; font-size:clamp(1.9rem,5.5vw,2.6rem);
+  line-height:1.35; margin:0; text-wrap:balance; letter-spacing:.01em;
+}
+.lede{color:var(--ink-2); font-size:1.02rem; margin:18px 0 0; max-width:62ch}
+section{padding-block:40px; border-bottom:1px solid var(--rule-2)}
+section:last-of-type{border-bottom:none}
+h2{
+  font-family:"Shippori Mincho",serif; font-weight:700; font-size:1.42rem;
+  margin:0 0 6px; text-wrap:balance;
+}
+h3{font-size:1.02rem; font-weight:700; margin:30px 0 8px}
+p{margin:14px 0; max-width:66ch}
+ul{margin:12px 0; padding-left:1.2em; max-width:66ch}
+li{margin:6px 0}
+strong{font-weight:700}
+em{font-style:normal; color:var(--accent); font-weight:500}
+code{
+  font-family:"JetBrains Mono",monospace; font-size:.86em;
+  background:var(--code-bg); padding:.12em .38em; border-radius:3px;
+}
+pre{
+  font-family:"JetBrains Mono",monospace; font-size:.82rem; line-height:1.7;
+  background:var(--sheet); color:var(--ink); border:1px solid var(--rule);
+  border-left:3px solid var(--accent); padding:14px 18px; overflow-x:auto; margin:16px 0;
+}
+pre code{background:none; padding:0; font-size:1em}
+table{width:100%; border-collapse:collapse; font-size:.88rem; margin:16px 0; font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto; margin:16px 0}
+.scroll table{margin:0}
+th{
+  text-align:left; font-weight:700; font-size:.74rem; letter-spacing:.06em;
+  color:var(--ink-3); text-transform:uppercase; padding:0 10px 8px; border-bottom:1px solid var(--rule);
+  vertical-align:bottom;
+}
+td{padding:9px 10px; border-bottom:1px solid var(--rule-2); vertical-align:top}
+td.num,th.num{text-align:right}
+td.sym{font-family:"JetBrains Mono",monospace; font-size:.8rem; white-space:nowrap}
+td.src{color:var(--ink-2)}
+.note{background:var(--accent-soft); border-left:3px solid var(--accent); padding:14px 18px; margin:20px 0; font-size:.93rem}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+.warn{background:var(--warn-soft); border-left:3px solid var(--warn)}
+.kv{display:grid; grid-template-columns:auto 1fr; gap:6px 18px; margin:16px 0; font-size:.92rem; max-width:66ch}
+.kv dt{color:var(--ink-3); font-family:"JetBrains Mono",monospace; font-size:.8rem; white-space:nowrap; padding-top:.15em}
+.kv dd{margin:0}
+@media (max-width:520px){ .kv{grid-template-columns:1fr; gap:2px 0} .kv dd{margin-bottom:10px} }
+/* データの流れ */
+.flow{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0}
+.flow > div{background:var(--sheet); border:1px solid var(--rule); padding:12px 14px; font-size:.86rem; line-height:1.6}
+.flow .step{font-family:"JetBrains Mono",monospace; font-size:.7rem; letter-spacing:.1em; color:var(--accent); display:block; margin-bottom:4px}
+.flow b{display:block; font-size:.94rem; margin-bottom:4px}
+@media (max-width:640px){ .flow{grid-template-columns:1fr 1fr} }
+@media (max-width:400px){ .flow{grid-template-columns:1fr} }
+.papers{list-style:none; margin:18px 0; padding:0; display:flex; flex-direction:column; gap:14px}
+.papers li{border-left:2px solid var(--accent); padding-left:14px}
+.papers .cite{font-family:"Shippori Mincho","Hiragino Mincho ProN",serif; font-size:1rem; line-height:1.6; margin:0; text-wrap:balance}
+.papers .meta{font-family:"JetBrains Mono",monospace; font-size:.72rem; letter-spacing:.07em; color:var(--ink-3); margin:5px 0 0}
+.tag{display:inline-block; font-family:"JetBrains Mono",monospace; font-size:.68rem; letter-spacing:.08em; padding:.1em .5em; border:1px solid var(--rule); border-radius:3px; color:var(--ink-2); vertical-align:middle}
+.tag.diff{border-color:var(--warn); color:var(--warn)}
+.tag.same{border-color:var(--accent); color:var(--accent)}
+footer{padding-block:32px 56px; color:var(--ink-3); font-size:.82rem; font-family:"JetBrains Mono",monospace; line-height:1.9}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Dataset Notes / Park SFC Model</p>
+  <h1>朴モデルのデータセット</h1>
+  <p class="lede">朴勝俊のストック＆フロー・一貫マクロ計量モデルが何のデータを、どこから、どう加工して使っているかを、3本の論文の記述からまとめた覚え書き。末尾に本実装（Python版）との対応と食い違いを置く。</p>
+</header>
+
+<section>
+  <h2>3本の論文とデータの系譜</h2>
+  <ul class="papers">
+    <li><p class="cite">朴(2025c)「発展型日本版ストック＆フロー・一貫マクロ計量モデルの構築」</p><p class="meta">関西学院大学総合政策学部 WP No.62 ／ 2025年9月</p></li>
+    <li><p class="cite">朴(2026a)「金融資産・負債の蓄積とマネー量の変化を把握できるマクロ計量モデルの構築」</p><p class="meta">No.62 の改訂版 ／ 2026年1月22日</p></li>
+    <li><p class="cite">朴(2026)「いわゆる『アベノミクス』がなかった場合の日本経済」</p><p class="meta">WP No.65 ／ 2026年4月</p></li>
+  </ul>
+  <p><strong>3本とも同じ一つのデータセットを使っています。</strong>2025c で作られ、2026a はその記述を整え、WP65 はそれを反実仮想に使った、という関係です。</p>
+  <div class="scroll"><table>
+    <tr><th>論文</th><th>データについての位置づけ</th><th>データ節の差</th></tr>
+    <tr><td>2025c</td><td>データセットを新規に構築。2章「使用するデータセット」と巻末の変数表で全容を記述</td><td>—</td></tr>
+    <tr><td>2026a</td><td>同じデータセット。データ節の本文は文言の整理のみ（「29年ぶん」「家計は住宅を…」の補足など）</td><td><span class="tag same">実質差なし</span></td></tr>
+    <tr><td>WP65</td><td>同じデータセット。推定期間を式ごとに再設定（例：法人ポートフォリオ 2006–2023）。営業余剰を残余式にしたため、統計上の不突合 <code>SD</code> をモデル内で使う</td><td><span class="tag same">同じ元データ</span></td></tr>
+  </table></div>
+  <div class="note"><p>2025c と 2026a のデータ節を機械的に突き合わせた結果、差分は段落の並べ替えと補足の一文だけで、出典・期間・加工法に変更はありませんでした。WP65 は本文2章が「2023年度国民経済計算」を使ったと書くだけで、データ節そのものは持ちません（本文全文と付録で確認）。</p></div>
+</section>
+
+<section>
+  <h2>骨格</h2>
+  <dl class="kv">
+    <dt>主な出典</dt><dd>内閣府「国民経済計算（GDP統計）」。GDP関連も資金循環関連も、ほぼすべてがここに含まれる</dd>
+    <dt>版</dt><dd>『2023年度（令和5年度）年次推計』を内閣府の Web から取得。取得日 2025年2月3日</dd>
+    <dt>期間</dt><dd>1994年度〜2023年度（29〜30年ぶん）</dd>
+    <dt>頻度</dt><dd><strong>年度</strong>。資金循環関連が年度でしか得られないため、全変数を年度に揃える</dd>
+    <dt>単位</dt><dd>名目・実質とも <strong>十億円</strong>。デフレータ・指数は 1 基準。金利・配当率は小数のまま（7.5% → 0.0754…）</dd>
+    <dt>系列数</dt><dd>約300（使わないものを含む）。2026a はモデル内の変数を 内生171・外生112・計283 と明記</dd>
+    <dt>暦年の変換</dt><dd>実物資本ストックは暦年しか無いので、<code>t年度 = 0.75 × t暦年 + 0.25 × (t+1)暦年</code> で擬似年度化。最終年度の値は作れない</dd>
+    <dt>頁番号</dt><dd>論文中の [p.xx] は、紙媒体最後の『平成30年度 国民経済計算年報』の該当表の位置。Web の Excel を引くときの道しるべ</dd>
+  </dl>
+</section>
+
+<section>
+  <h2>データの流れ</h2>
+  <p>SNA の原表から、モデルが読める形になるまでに4段階あります。</p>
+  <div class="flow">
+    <div><span class="step">01 原表</span><b>国民経済計算</b>制度部門別勘定（制所・制資）、金融資産・負債の取引と残高、固定資本マトリックス、主要系列表</div>
+    <div><span class="step">02 統合</span><b>資金循環の3表</b>49品目→7種、8部門→6部門に統合。残高・取引・評価調整（調整表は定義式で作る）</div>
+    <div><span class="step">03 派生</span><b>計算で作る系列</b>金利・配当率、金融所得、貯蓄・純貸出の調整項、資本ストック調整項、統計上の不突合</div>
+    <div><span class="step">04 補完</span><b>SNA 以外</b>労働力調査、IMF 世界GDP、日銀 実効為替、米国金利、不動産価格指数、消費税率、ダミー</div>
+  </div>
+  <h3>外生変数112本の内訳（本実装）</h3>
+  <p>方程式体系を読むと内生169本・外生112本になります。どこから来るかで分けると次のとおりです。</p>
+  <div class="scroll"><table>
+    <tr><th>区分</th><th>本数</th><th>中身</th><th>作るスクリプト・CSV</th></tr>
+    <tr><td>A コードで生成</td><td class="num">11</td><td>年ダミー9本、TIME（1994年度＝1）、WHMAX（総実労働時間指数のトレンド）</td><td class="src">fetch_misc.py → japan_misc_fy.csv</td></tr>
+    <tr><td>B1 資金循環・評価調整</td><td class="num">30</td><td>NGSHACG_* など 6資産×5部門</td><td class="src">fetch_ff.py → japan_ff_cg_fy.csv</td></tr>
+    <tr><td>B2 資金循環・外生扱いの残高</td><td class="num">9</td><td>NGSHA_G、NLBDA_G、NPENA_CB など</td><td class="src">fetch_ff.py → japan_ff_stock_fy.csv</td></tr>
+    <tr><td>B3 資金循環・安全資産の保有シェア</td><td class="num">9</td><td>NGSHSHARE_H など 3資産×3部門</td><td class="src">fetch_ff.py → japan_ff_share_fy.csv</td></tr>
+    <tr><td>C 制度部門別勘定のフロー</td><td class="num">26</td><td>KTR_*、NP_*、SB2_*、STR_*、CPEN_*、T_W（ゼロ）など</td><td class="src">fetch_sector.py → japan_sector_fy.csv</td></tr>
+    <tr><td>D 他の実データからの残差</td><td class="num">17</td><td>EPSILON_* 5本、GAPNL_* 6本、KCG_* 4本、STR_GAP、YR_GAP</td><td class="src">fetch_resid.py・fetch_fincome.py</td></tr>
+    <tr><td>E SNA 以外</td><td class="num">9</td><td>NEER、YR_W、LF、N_W、CONTAX、I_US、PW、GOLD、RH（定義でゼロ）</td><td class="src">fetch_misc.py → japan_misc_fy.csv</td></tr>
+    <tr><td>実質国債金利</td><td class="num">1</td><td>RrB（バージョン1 で外生。rB − 消費デフレータ上昇率）</td><td class="src">fetch_endo.py → japan_endo_fy.csv</td></tr>
+    <tr><th>合計</th><th class="num">112</th><th></th><th></th></tr>
+  </table></div>
+  <div class="note"><p>上はバージョン1（RrB 外生、日銀の国債保有 NGBA_CB 内生）の数え方です。巻末の原文どおり（バージョン2）だと NGBA_CB が外生・RrB が内生に入れ替わり、B2 が10本になります。WP65 版は営業余剰を残余式にするため統計上の不突合 SD が外生に加わって <strong>113本</strong>。D のうち GAPNL_CB・GAPNL_G は WP65 版では読み込み時に組み直します。これに加えてコード側で ADJ_IR_N（反実仮想シナリオ8のアドファクター）を外生として与えます。D の17本は B と C の実データが揃ってから残差として計算するので、fetch_*.py の実行順が決まっています。</p></div>
+</section>
+
+<section>
+  <h2>出典① 国民経済計算の使いどころ</h2>
+  <p>論文が名指ししている表と、そこから取る変数群です。</p>
+  <div class="scroll"><table>
+    <tr><th>統計表（『年報』の呼び方）</th><th>取る変数</th><th>備考</th></tr>
+    <tr><td>制度部門別所得支出勘定（「制所」）</td><td>賃金 WB、営業余剰 B2_X、直接税、社会移転、貯蓄 S_X、可処分所得 YD、財産所得（利子・配当）</td><td class="src">金利・配当率の分子もここから</td></tr>
+    <tr><td>制度部門別資本勘定（「制資」）</td><td>設備投資 In_X、固定資本減耗 D_X、土地純購入 NP_X、資本移転 KTR_X、純貸出 NL_X</td><td class="src">純貸出＝貯蓄−投資−土地＋資本移転 の恒等式が成り立つ表</td></tr>
+    <tr><td>主要系列表 [p.52 / p.60 / p.66]</td><td>名目・実質の GDP、家計消費、政府消費、輸出入、各デフレータ</td><td class="src">家計消費・政府消費は「現実最終消費」</td></tr>
+    <tr><td>統合勘定 1. 国内総生産勘定 [p.6]</td><td>営業余剰 B2（全体）、統計上の不突合 StDis</td><td class="src">B2 は固定資本減耗を含む総概念</td></tr>
+    <tr><td>フロー編 24. 金融資産・負債の取引 [pp.412–]</td><td>取引行列（フロー）</td><td class="src">「金融機関の内訳」[p.426] で日銀を分離。2023年度確報は資産側 s242・負債側 s243 の別ファイル</td></tr>
+    <tr><td>ストック編 6. 金融資産・負債の残高 [pp.570–]</td><td>バランスシート（ストック）</td><td class="src">「金融機関の内訳」[p.566] で日銀を分離。2023年度確報は資産側 ss62・負債側 ss63 の別ファイル</td></tr>
+    <tr><td>固定資本マトリックス（ストック）[p.516–]</td><td>名目資本ストック Kn_N / Kn_F / Kn_G / Kn_H（住宅）</td><td class="src">暦年 → 擬似年度化</td></tr>
+    <tr><td>海外勘定 [p.340]</td><td>海外の移転、貯蓄（経常収支）、資本移転、純貸出</td><td class="src">海外の税 T_W は対応項目なし</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>資金循環の加工</h2>
+  <p>ここが一番手間のかかる部分で、論文は Excel の VBA で処理しています（71行×22列＝1,562系列、30年度ぶんで46,860個）。</p>
+
+  <h3>金融資産を7種に統合（論文 表1）</h3>
+  <div class="scroll"><table>
+    <tr><th>記号</th><th>名称</th><th>統合前の項目</th></tr>
+    <tr><td class="sym">GSH</td><td>金・SDR・ハイパワードマネー</td><td>貨幣用金・SDR、現金、日銀預け金、政府預金</td></tr>
+    <tr><td class="sym">GB</td><td>国債短証</td><td>国庫短期証券、国債・財投債</td></tr>
+    <tr><td class="sym">DEP</td><td>預金</td><td>流動性預金、定期性預金、譲渡性預金、外貨預金</td></tr>
+    <tr><td class="sym">LBD</td><td>融資・債券・デリバティブ</td><td>地方債、政府関係機関債、金融債、事業債、居住者発行外債、CP、信託受益権、債券流動化関連商品（＋貸出・借入、金融派生商品、その他）</td></tr>
+    <tr><td class="sym">EQU</td><td>株式等</td><td>持分・投資信託受益証券</td></tr>
+    <tr><td class="sym">PEN</td><td>保険年金</td><td>保険・年金・定型保証</td></tr>
+    <tr><td class="sym">NFW</td><td>金融純資産</td><td>—</td></tr>
+  </table></div>
+  <p>表1 の LBD の欄は債務証券の内訳しか印刷されていませんが、貸出・借入と金融派生商品、その他を含めないと部門合計が原表と合いません（本実装での検算）。</p>
+
+  <h3>部門を6つに統合（論文 表2）</h3>
+  <div class="scroll"><table>
+    <tr><th>記号</th><th>部門</th><th>中身</th></tr>
+    <tr><td class="sym">N</td><td>非金融法人</td><td>非金融法人企業（公的企業を含む）＋対家計民間非営利団体</td></tr>
+    <tr><td class="sym">CB</td><td>日本銀行</td><td>「金融機関の内訳」から抜き出す。列は見出しの「中央銀行」から探す（下の注）</td></tr>
+    <tr><td class="sym">F</td><td>他金融機関</td><td>日銀以外の金融機関すべて。銀行・投信・証券・保険年金・公的金融機関</td></tr>
+    <tr><td class="sym">G</td><td>一般政府</td><td>中央政府・地方政府・社会保障基金</td></tr>
+    <tr><td class="sym">H</td><td>家計</td><td>個人企業を含む</td></tr>
+    <tr><td class="sym">W</td><td>海外</td><td>—</td></tr>
+  </table></div>
+
+  <h3>純計・評価調整・金</h3>
+  <ul>
+    <li><strong>純計</strong>：各部門・各資産を「資産−負債」の純額で持つ。変数名は <code>N + 資産 + A + _部門</code>（例 <code>NEQUA_H</code>）。金融純資産は負債側なので <code>NNFWA</code> は純資産がプラスの部門でマイナス</li>
+    <li><strong>評価調整（キャピタルゲイン）</strong>は統計に無いので、<code>評価調整_t ＝ 残高_t − 残高_{t−1} − 取引_t</code> で作る。残高と取引の両方が要るのはこのため</li>
+    <li><strong>金（貨幣用金・SDR）</strong>は対応する負債を持つ部門が無いので GSH の部門合計がゼロにならない（2023年度で9,115十億円）。便宜上、全額を日銀が保有すると仮定</li>
+    <li>モデル内では取引表は使わない（残高と評価調整だけで動く）</li>
+  </ul>
+  <div class="note warn"><p><strong>「金融機関の内訳」表の組み方は確報の版で違います。</strong>2024年度確報は1シートに資産側と負債側が左右に並びますが、2023年度確報は資産側（ss62 / s242）と負債側（ss63 / s243）が別ファイルです。列を番号で決め打ちすると、日銀の負債側に別の列（その他の金融仲介機関の資産側）を当ててしまい、発行銀行券と日銀当座預金が丸ごと落ちて、他金融機関 F が鏡像でずれ、rL と金融所得を通じて全部門に波及します。本実装は見出しの「中央銀行」の位置から列を探し、見出しが1つなら負債側のファイルを別に取りに行きます。部門ごとの縦計＝0 という検算は作り方から必ず通るので、この取り違えは捕まえられません。残高の検算に「日銀の現金・HPM が他部門の保有を打ち消す負値か」を入れてあります。</p></div>
+</section>
+
+<section>
+  <h2>SNA から計算で作る系列</h2>
+  <p>公表値をそのまま使うのではなく、著者が定義式で作った系列です。ここに論文の「作法」が一番出ます。</p>
+
+  <h3>金利・配当率（論文 表6）</h3>
+  <p>市場金利の統計は使いません。<strong>「その資産を主に持つ部門の利子・配当 ÷ その資産の残高」</strong>で、SNA の中だけから作ります。利子は「前年度末の残高 × 前年度に決まった金利」で当年度に受け払いされると考えるので、<code>t年度の金利 = (t+1年度の利子) ÷ (t年度末の残高)</code>。最終年度の値が作れないので、2023年度は2022年度の値で代用。</p>
+  <div class="scroll"><table>
+    <tr><th>記号</th><th>何の利回り</th><th>分子（部門・項目）</th><th>分母</th></tr>
+    <tr><td class="sym">rH</td><td>現金・HPM</td><td>—</td><td>ゼロとする（日銀当座預金の付利もゼロ）</td></tr>
+    <tr><td class="sym">rB</td><td>国債短証</td><td>一般政府の財産所得（支払）利子 [pp.26–27]</td><td>国債発行額 −NGBA_G</td></tr>
+    <tr><td class="sym">rM</td><td>預金</td><td>家計の財産所得（受取）利子 [pp.30–31]</td><td>家計の預金 NDEPA_H</td></tr>
+    <tr><td class="sym">rL</td><td>融資・債券</td><td>金融機関の財産所得（受取）利子 [pp.24–25]</td><td>金融機関の融資債券純保有 NLBDA_F</td></tr>
+    <tr><td class="sym">chi</td><td>株式配当</td><td><strong>非金融法人</strong>の配当純受取（法人分配所得＋海外直接投資再投資収益、受取−支払）[p.22, p.34]</td><td>前期の NEQUA_N（負値÷負値）</td></tr>
+    <tr><td class="sym">psi</td><td>保険年金</td><td><strong>金融機関</strong>の純保険年金所得（保険契約者帰属投資所得の受払差）[pp.24–25]</td><td>前期の NPENA_F</td></tr>
+  </table></div>
+  <p>実質化はいずれも消費デフレータ PC を差し引く（<code>RrB = rB − PC</code>）。</p>
+
+  <h3>金融所得と調整項</h3>
+  <ul>
+    <li><code>FINCOME_X = rB·NGBA_X(−1) + rM·NDEPA_X(−1) + rL·NLBDA_X(−1) + chi·NEQUA_X(−1) + psi·NPENA_X(−1)</code>。全部門に同じ利回りを当てるので実績の財産所得とは食い違い、その差は貯蓄の調整項 <code>epsilon_X</code> が吸収する</li>
+    <li><code>GAPNL_X</code>：資本勘定から計算した純貸出と金融勘定の純貸出との差。日銀は <code>GAPNL_CB = NL_CB − FINCOME_CB</code> で、大部分が政府への納付金に相当するが 2025c/2026a はモデル化しない（WP65 で政府移転に変更）</li>
+    <li><code>KCG_X = Kn_X − (Kn_X(−1) + In_X − D_X)</code>：資本ストックの調整項</li>
+    <li><code>STR_GAP</code>、<code>YR_GAP</code>：社会移転と実質GDPの合計開差</li>
+    <li>年金受給権調整 <code>CPEN</code>、営業余剰の部門シェア <code>SB2_X</code>、安全資産の保有シェア（GSH/GB/DEP の3分割）なども実績から作った外生変数</li>
+  </ul>
+</section>
+
+<section>
+  <h2>出典② 国民経済計算の外</h2>
+  <div class="scroll"><table>
+    <tr><th>変数</th><th>出典</th><th>備考</th></tr>
+    <tr><td class="sym">LF, N_N, UN, UNR, Employee, NiLF</td><td>総務省「労働力調査」長期時系列表（年度平均結果）</td><td class="src">万人。N_N は就業者数、N_H = N_N − N_W</td></tr>
+    <tr><td class="sym">N_W</td><td>「労働力調査」と記載</td><td class="src">外国人純就業者数。系列としては公表されていない（後述）</td></tr>
+    <tr><td class="sym">YR_W</td><td>IMF World Economic Outlook（2024年10月）世界実質GDP成長率</td><td class="src">1994年＝100 の指数に積み上げ</td></tr>
+    <tr><td class="sym">NEER</td><td>日本銀行 名目実効為替レート</td><td class="src">1基準の指数、大きいほど円高。PM = PW / NEER と分解</td></tr>
+    <tr><td class="sym">I_US</td><td>米国10年物国債金利</td><td class="src">海外部門のポートフォリオ式で日米金利差に使う</td></tr>
+    <tr><td class="sym">Ph_index</td><td>国土交通省 不動産価格指数</td><td class="src">住宅ストック価格まわり</td></tr>
+    <tr><td class="sym">CONTAX</td><td>消費税率（年度平均、％）</td><td class="src">2014年度 8、2019年度 9、2020年度以降 10</td></tr>
+    <tr><td class="sym">TIME, Whmax, LOAD</td><td>タイムトレンド（1994年度＝1）、正常労働時間のトレンド式、稼働率指数（1994年度以降の最大 135.10）</td><td class="src">Whmax = 118.47 − 0.585·TIME（自前推定。論文 118.44 − 0.586·TIME）</td></tr>
+    <tr><td class="sym">W_hours</td><td>厚生労働省「毎月勤労統計調査」総実労働時間指数（2020=100、事業所規模30人以上）</td><td class="src">生産関数の推定に使う</td></tr>
+    <tr><td class="sym">DUM2000 … DUM2023</td><td>年ダミー</td><td class="src">2000, 2001, 2007, 2008, 2009, 2014, 2020, 2022, 2023</td></tr>
+  </table></div>
+  <div class="note"><p>為替レート変化に伴う対外資産の再評価は<strong>外生のまま</strong>です。論文 5.8 節は「この再評価を内生化することは現時点では非常に難しい」として今後の課題にしています。円安シナリオでもキャピタルゲインは動きません。</p></div>
+</section>
+
+<section>
+  <h2>本実装での対応と食い違い</h2>
+  <p>Python 版は著者のデータセットを使わず、同じ公開統計から独立に組み直しています。論文と同じ作法で作った項目と、違う項目を分けます。</p>
+
+  <h3>同じ作法で作っているもの <span class="tag same">一致</span></h3>
+  <div class="scroll"><table>
+    <tr><th>項目</th><th>論文</th><th>本実装</th></tr>
+    <tr><td>資金循環の統合</td><td>Excel VBA で 7種×6部門</td><td><code>fetch_ff.py</code> が ESRI の Excel から同じ統合を行い、統合した6種の合計が原表の「合計」行と一致することと、部門の見出しの並びを毎回検算</td></tr>
+    <tr><td>評価調整</td><td>残高−前期残高−取引</td><td>同じ定義式</td></tr>
+    <tr><td>制度部門別勘定</td><td>『年報』の項目番号で参照</td><td>項目名で引く（公表 Excel は部門により番号がずれる）。純貸出の恒等式で検算</td></tr>
+    <tr><td>調整項 GAPNL / KCG / epsilon / STR_GAP / YR_GAP</td><td>データセット作成時に定義式で計算</td><td>同じ定義式（<code>fetch_resid.py</code>, <code>fetch_fincome.py</code>）</td></tr>
+    <tr><td>NEER</td><td>日本銀行</td><td>日本銀行 時系列統計 API</td></tr>
+    <tr><td>労働力人口・就業者数</td><td>労働力調査 長期時系列表（年度平均）</td><td>同じ表の Excel を e-Stat のファイル置き場から直接読む（API キー不要）。列は見出しで探す</td></tr>
+    <tr><td>資本ストックの年度化</td><td>0.75 / 0.25 の加重</td><td>同じ</td></tr>
+    <tr><td>TIME の原点</td><td>変数表「1994cy=1」</td><td>同じ</td></tr>
+    <tr><td>労働時間 W_hours</td><td>毎月勤労統計 2020=100</td><td>e-Stat の指数累積データ（30人以上）。TIME に回帰すると 118.47 − 0.585·TIME で論文の式と一致</td></tr>
+    <tr><td>稼働率 LOAD</td><td>METI 製造工業稼働率指数 2020=100</td><td>統計ダッシュボード API から同じ指数。1994年度以降の最大 135.10（論文 135.6667）</td></tr>
+    <tr><td>世界実質GDP YR_W</td><td>IMF WEO 2024年10月の世界成長率を 1994年＝100 の指数に</td><td>同じ版の世界集計を DBnomics（IMF/WEOAGG:2024-10）から取り、同じ手順で指数化。届かなければ IMF DataMapper 最新版、世界銀行 PPP 系列の順に代用</td></tr>
+    <tr><td>米国金利 I_US</td><td>米国10年物国債金利（出典の記載なし）</td><td>FRED の OECD 系列。Fed H.15 の10年国債利回りと年度平均で完全に一致するので、出典が何であれ同じ数字</td></tr>
+  </table></div>
+
+  <h3>いまも違うもの <span class="tag diff">差あり</span></h3>
+  <p>作り方が論文に書いてあるものは、すべて論文どおりに揃えました（下の履歴）。残っているのは、論文に作り方が書かれていないか、そもそも同じ数字にはならない性質のものです。</p>
+  <div class="scroll"><table>
+    <tr><th>項目</th><th>論文</th><th>本実装</th><th>どう違うか</th></tr>
+    <tr><td>外国人純就業者 N_W</td><td>出典は「労働力調査」とあるが、系列は公表されていない</td><td>論文自身の関係式 W = WB_N/N_N = WB_W/N_W から <code>N_W = WB_W·N_N/WB_N</code> で導出</td><td class="src">著者がどう作ったか不明。論文の定義とは整合するが、同じ数字とは限らない</td></tr>
+    <tr><td>海外の税 T_W</td><td>変数表の出典欄が空</td><td>ゼロ</td><td class="src">著者の値が不明</td></tr>
+    <tr><td>統計上の不突合 SD</td><td>統合勘定 [p.80] の公表値</td><td><code>YN − WB_N − TIN_N − B2</code> で逆算</td><td class="src">恒等式で決まるので値は同じはず。取り方が違うだけ</td></tr>
+    <tr><td>データセットそのもの</td><td>著者が Excel で組んだもの（非公開）</td><td>同じ公開統計から独立に組み直した</td><td class="src">同じ表を同じ手順で組んでも、丸めや項目の取り方の細部で小数以下は揃わない。係数が論文と桁で合って小数で合わないのはこれ</td></tr>
+  </table></div>
+
+  <h3>直して揃えたもの <span class="tag same">履歴</span></h3>
+  <div class="scroll"><table>
+    <tr><th>日付</th><th>項目</th><th>前</th><th>後</th></tr>
+    <tr><td class="sym">2026-09-12</td><td>データの版</td><td>2024年度確報（1994–2024）</td><td>2023年度確報（1994–2023）。連鎖の参照年も2015年で一致</td></tr>
+    <tr><td class="sym">2026-09-12</td><td>配当率 chi・年金配当率 psi</td><td>家計の受取 ÷ 家計の残高</td><td>非金融法人・金融機関（発行者側）の純受取 ÷ 純残高</td></tr>
+    <tr><td class="sym">2026-09-12</td><td>金利 rB / rM / rL の時点と分母</td><td>利子_t ÷ 資金循環の粗残高_{t−1}</td><td>利子_{t+1} ÷ 純残高_t。政府と金融機関で分母が1.3〜2.8倍変わる</td></tr>
+    <tr><td class="sym">2026-09-13</td><td>日銀の列</td><td>「金融機関の内訳」の負債側に別の列（その他の金融仲介機関の資産側）を当てていた</td><td>見出し「中央銀行」から列を探し、別ファイルの負債側を読む</td></tr>
+    <tr><td class="sym">2026-09-15</td><td>労働力調査</td><td>e-Stat API の年次表（各年の報告書の値。震災期は欠測を補間）</td><td>長期時系列表（国勢調査基準の切替えに合わせた時系列接続用数値。震災期は補完推計値）</td></tr>
+    <tr><td class="sym">2026-09-16</td><td>TIME の原点</td><td>1994年度＝0（当てはめから推定）</td><td>1994年度＝1（変数表の記載）</td></tr>
+    <tr><td class="sym">2026-09-16</td><td>労働時間・稼働率</td><td>データ無し。WHMAX は論文の係数、LOAD は定数として定数項に吸収</td><td>毎月勤労統計の総実労働時間指数（30人以上）と製造工業稼働率指数（2020年基準）。生産関数を論文と同じ変数で推定でき、弾力性が論文と小数2桁まで揃った</td></tr>
+    <tr><td class="sym">2026-09-16</td><td>世界実質GDP</td><td>世界銀行（市場レートベース → 同日中に PPP ベース）</td><td>IMF WEO 2024年10月版（論文と同じ出典・同じ版）</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>覚えておくこと</h2>
+  <ul>
+    <li><strong>著者のデータセットは公開されていません。</strong>本実装が論文の数字と桁で合って小数で合わないのは、係数を別のデータで推定し直しているためです</li>
+    <li>最終年度に作れない値がいくつもあります：金利3種（前年値で代用）、資本ストック（暦年変換の都合）、配当率の初年度（1994年度）</li>
+    <li>データはすべて名目で、実質値はデフレータで割って作ります。「断りがないデータは全て名目」</li>
+    <li>金融所得は市場金利ではなく SNA 内の比率で作るので、実績の財産所得とはかなり違い、その差が epsilon に溜まります。論文自身が「epsilon_F は近年になるほど大きくなる」と認めています</li>
+    <li>資金循環の3表のうち、モデルが動くのに要るのは残高と評価調整だけです（取引表は作るが使わない）</li>
+  </ul>
+</section>
+
+<footer>
+  出典：朴(2025c) 2章・付録変数表、朴(2026a) 2章・4章・5章・付録、朴(2026) WP65 付録および著者配布の図表訂正。
+  本実装の対応は fetch_*.py の docstring から。<br>
+  2026年9月16日
+</footer>
+</div>
