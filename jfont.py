@@ -14,8 +14,12 @@ CANDIDATES = [
     "Meiryo",           # Windows（Yu Gothic が無い古い環境）
     "Hiragino Sans",    # Mac
     "Noto Sans CJK JP", # Linux（fonts-noto-cjk）
-    "IPAexGothic",      # Linux（fonts-ipafont）
+    "IPAexGothic",      # Linux（fonts-ipaexfont）
+    "IPAPGothic",       # Linux（fonts-ipafont）
+    "IPAGothic",        # Linux（fonts-ipafont / fonts-japanese-gothic）
     "TakaoGothic",      # Linux（fonts-takao）
+    "VL Gothic",        # Linux（fonts-vlgothic）
+    "WenQuanYi Zen Hei",  # Linux。中華圏向けだが日本語の字形も一通り持つ
 ]
 
 
